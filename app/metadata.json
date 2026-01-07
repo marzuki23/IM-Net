@@ -1,0 +1,7 @@
+{
+    "name": "WiFiNet Payment Gateway",
+    "description": "A comprehensive WISP management system featuring admin and user portals for billing, payment tracking, and network management with smart AI support.",
+    "requestFramePermissions": [
+        "camera"
+    ]
+}
