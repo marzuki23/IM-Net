@@ -1,0 +1,71 @@
+// WiFi service packages data - ready for database integration
+import type { WiFiPackage } from "@/lib/types"
+
+export const WIFI_PACKAGES_LANDING: WiFiPackage[] = [
+  {
+    id: "p1",
+    name: "Starter Pack",
+    speed: "10 Mbps",
+    price: 150000,
+    description: "Perfect untuk pengguna individu dan pekerjaan ringan",
+    features: [
+      "Kecepatan hingga 10 Mbps",
+      "Data unlimited",
+      "1 perangkat aktif",
+      "Support email",
+      "WiFi gratis instalasi",
+    ],
+    recommended: false,
+  },
+  {
+    id: "p2",
+    name: "Family Pack",
+    speed: "30 Mbps",
+    price: 250000,
+    description: "Ideal untuk keluarga dengan banyak pengguna",
+    features: [
+      "Kecepatan hingga 30 Mbps",
+      "Data unlimited",
+      "5 perangkat aktif bersamaan",
+      "Support 24/7 via chat & email",
+      "WiFi gratis instalasi",
+      "Modem modern berkualitas tinggi",
+    ],
+    recommended: false,
+  },
+  {
+    id: "p3",
+    name: "Pro Gamer",
+    speed: "50 Mbps",
+    price: 350000,
+    description: "Untuk gaming dan streaming berkualitas tinggi",
+    features: [
+      "Kecepatan hingga 50 Mbps",
+      "Data unlimited",
+      "10 perangkat aktif",
+      "Priority support 24/7",
+      "WiFi gratis instalasi",
+      "Router gaming premium",
+      "Jaminan uptime 99%",
+    ],
+    recommended: false,
+  },
+  {
+    id: "p4",
+    name: "Ultimate Fiber",
+    speed: "100 Mbps",
+    price: 500000,
+    description: "Koneksi super cepat untuk kebutuhan bisnis dan produktivitas maksimal",
+    features: [
+      "Kecepatan hingga 100 Mbps",
+      "Data unlimited",
+      "20 perangkat aktif",
+      "Dedicated account manager",
+      "Priority support 24/7",
+      "Router WiFi 6 premium",
+      "Jaminan uptime 99.9%",
+      "Konsultasi jaringan gratis",
+    ],
+    recommended: false,
+  },
+]
