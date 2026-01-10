@@ -63,7 +63,7 @@ export default function FAQWiFi() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-slate-950">
+    <section id="faq" className="py-16 md:py-24 bg-white dark:bg-slate-950">
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex flex-col gap-10 md:flex-row md:gap-16">
           <div className="md:w-1/3">

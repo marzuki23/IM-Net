@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import { HeroHeader } from "@/components/header";
 import { ChevronRight, Signal } from "lucide-react";
 import Image from "next/image";
+import { getCurrentUser } from "@/lib/sessions";
 
-export default function HeroWiFi() {
+export default async function HeroWiFi() {
+  const user = await getCurrentUser();
+
   return (
     <>
-      <HeroHeader />
+      <HeroHeader user={user} />
       <main className="overflow-hidden">
         <section className="relative bg-gradient-to-b from-orange-50 to-white dark:from-orange-950/10 dark:to-slate-950 pt-13 pb-16 md:pt-29 md:pb-24">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">

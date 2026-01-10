@@ -1,71 +1,50 @@
-// WiFi service packages data - ready for database integration
-import type { WiFiPackage } from "@/lib/types"
+export interface WiFiPackage {
+  id: string;
+  name: string;
+  speed: string;
+  price: number;
+  installationFee: number;
+  description: string;
+  features: string[];
+  recommended?: boolean;
+}
 
-export const WIFI_PACKAGES_LANDING: WiFiPackage[] = [
+export const WIFI_PACKAGES: WiFiPackage[] = [
   {
-    id: "p1",
-    name: "Starter Pack",
+    id: "pkg-10mbps",
+    name: "Paket Hemat",
     speed: "10 Mbps",
     price: 150000,
-    description: "Perfect untuk pengguna individu dan pekerjaan ringan",
-    features: [
-      "Kecepatan hingga 10 Mbps",
-      "Data unlimited",
-      "1 perangkat aktif",
-      "Support email",
-      "WiFi gratis instalasi",
-    ],
-    recommended: false,
+    installationFee: 50000,
+    description: "Ideal untuk penggunaan ringan 1-3 perangkat",
+    features: ["Unlimited Quota", "Support 24/7", "Stabil & Cepat"],
   },
   {
-    id: "p2",
-    name: "Family Pack",
-    speed: "30 Mbps",
-    price: 250000,
-    description: "Ideal untuk keluarga dengan banyak pengguna",
-    features: [
-      "Kecepatan hingga 30 Mbps",
-      "Data unlimited",
-      "5 perangkat aktif bersamaan",
-      "Support 24/7 via chat & email",
-      "WiFi gratis instalasi",
-      "Modem modern berkualitas tinggi",
-    ],
-    recommended: false,
+    id: "pkg-20mbps",
+    name: "Paket Keluarga",
+    speed: "20 Mbps",
+    price: 168000,
+    installationFee: 0,
+    description: "Ideal untuk penggunaan 4-6 perangkat",
+    features: ["Unlimited Quota", "Gratis Instalasi", "Support 24/7", "Stabil & Cepat"],
+    recommended: true,
   },
   {
-    id: "p3",
-    name: "Pro Gamer",
-    speed: "50 Mbps",
-    price: 350000,
-    description: "Untuk gaming dan streaming berkualitas tinggi",
-    features: [
-      "Kecepatan hingga 50 Mbps",
-      "Data unlimited",
-      "10 perangkat aktif",
-      "Priority support 24/7",
-      "WiFi gratis instalasi",
-      "Router gaming premium",
-      "Jaminan uptime 99%",
-    ],
-    recommended: false,
+    id: "pkg-40mbps",
+    name: "Paket Gamer",
+    speed: "40 Mbps",
+    price: 218000,
+    installationFee: 0,
+    description: "Ideal untuk penggunaan 5-8 perangkat & gaming",
+    features: ["Unlimited Quota", "Gratis Instalasi", "Low Latency", "Support 24/7"],
   },
   {
-    id: "p4",
-    name: "Ultimate Fiber",
-    speed: "100 Mbps",
-    price: 500000,
-    description: "Koneksi super cepat untuk kebutuhan bisnis dan produktivitas maksimal",
-    features: [
-      "Kecepatan hingga 100 Mbps",
-      "Data unlimited",
-      "20 perangkat aktif",
-      "Dedicated account manager",
-      "Priority support 24/7",
-      "Router WiFi 6 premium",
-      "Jaminan uptime 99.9%",
-      "Konsultasi jaringan gratis",
-    ],
-    recommended: false,
+    id: "pkg-60mbps",
+    name: "Paket Sultan",
+    speed: "60 Mbps",
+    price: 260000,
+    installationFee: 0,
+    description: "Ideal untuk penggunaan 7-9 perangkat & streaming 4K",
+    features: ["Unlimited Quota", "Gratis Instalasi", "Prioritas Support", "Super Cepat"],
   },
-]
+];

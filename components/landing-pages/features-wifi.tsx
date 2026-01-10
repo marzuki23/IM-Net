@@ -61,7 +61,7 @@ const features: Feature[] = [
 
 export default function FeaturesWiFi() {
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-slate-950">
+    <section id="features" className="py-16 md:py-24 bg-white dark:bg-slate-950">
       <div className="mx-auto max-w-5xl px-6">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">

@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ user, onLogout, children }) => {
           <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
             <Wifi size={24} />
           </div>
-          <span className="font-bold text-xl text-slate-800">IMNet</span>
+          <span className="font-bold text-xl text-slate-800">WiFiNet</span>
         </div>
 
         <nav className="mt-6 px-4 space-y-2">

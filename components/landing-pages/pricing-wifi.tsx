@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check, Zap } from "lucide-react";
-import { WIFI_PACKAGES_LANDING } from "@/app/config/packages";
+import { WIFI_PACKAGES } from "@/app/config/packages";
 
 export default function PricingWiFi() {
   return (
@@ -31,7 +31,7 @@ export default function PricingWiFi() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {WIFI_PACKAGES_LANDING.map((pkg) => (
+          {WIFI_PACKAGES.map((pkg) => (
             <Card
               key={pkg.id}
               className={`flex flex-col transition-all border-2 ${
@@ -90,7 +90,7 @@ export default function PricingWiFi() {
                       : "bg-slate-200 hover:bg-slate-300 text-slate-900"
                   }`}
                 >
-                  <Link href="/auth">Pilih Paket</Link>
+                  <Link href="/dashboard/requests">Pilih Paket</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -107,7 +107,7 @@ export default function PricingWiFi() {
             size="lg"
             className="bg-orange-600 hover:bg-orange-700 text-white"
           >
-            <Link href="/auth">Hubungi Kami Sekarang</Link>
+            <Link href="#">Hubungi Kami Sekarang</Link>
           </Button>
         </div>
       </div>

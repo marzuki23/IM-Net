@@ -1,0 +1,15 @@
+{
+    "schema": "./db/schema.ts",
+    "out": "./drizzle/migrations",
+    "driver": "pg",
+    "dbCredentials": {
+      "connectionString": "${{ env.DATABASE_URL }}"
+    },
+    "verbose": true,
+    "strict": true,
+    "migrations": {
+      "table": "__drizzle_migrations__",
+      "schema": "public"
+    }
+  }
+  

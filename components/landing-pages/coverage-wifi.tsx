@@ -53,7 +53,7 @@ const coverageAreas: CoverageArea[] = [
 
 export default function CoverageWiFi() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50 dark:from-slate-950 dark:to-blue-950/10">
+    <section id="coverage" className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50 dark:from-slate-950 dark:to-blue-950/10">
       <div className="mx-auto max-w-5xl px-6">
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-900/50 mb-6">
