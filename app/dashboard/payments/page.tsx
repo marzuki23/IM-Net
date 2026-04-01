@@ -125,7 +125,7 @@ export default function PaymentsPage() {
                           className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
                         >
                           <td className="py-3 px-4 font-medium">
-                            {payment.invoiceNumber}
+                            {payment.invoiceNumber || `INV-${payment.id.slice(0, 8)}`}
                           </td>
                           <td className="py-3 px-4 text-slate-600 dark:text-slate-400">
                             {payment.description}

@@ -11,106 +11,72 @@ export default async function HeroWiFi() {
   return (
     <>
       <HeroHeader user={user} />
-      <main className="overflow-hidden">
-        <section className="relative bg-gradient-to-b from-orange-50 to-white dark:from-orange-950/10 dark:to-slate-950 pt-13 pb-16 md:pt-29 md:pb-24">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-300/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300/10 rounded-full blur-3xl"></div>
+      <main className="overflow-hidden bg-[#FAF8F5] dark:bg-slate-950">
+        <section className="relative pt-20 pb-24 md:pt-32 md:pb-32">
+          
+          <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20 dark:opacity-5">
+             <div className="absolute top-10 right-10 leading-none text-[300px] text-stone-200 select-none">🌍</div>
           </div>
 
           <div className="relative z-10">
-            <div className="mx-auto max-w-6xl px-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="mx-auto max-w-7xl px-6 md:px-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 {/* Left side - Text content */}
-                <div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 dark:bg-slate-900/70 border border-orange-200 dark:border-orange-900/50 mb-6">
-                    <Signal className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                    <span className="text-sm font-medium text-orange-600 dark:text-orange-400">
-                      Koneksi Internet Terdepan
+                <div className="lg:col-span-5 pt-10">
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#2a2a2a] dark:text-white mb-6 leading-[1.1]">
+                    Internet Cepat Tanpa{" "}
+                    <span className="relative inline-block text-orange-500">
+                      Batas
+                      <svg className="absolute w-full h-3 -bottom-1 left-0 text-orange-300" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00035 6.64338C48.6669 1.95679 133.2 -1.4116 195.917 6.64338" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/></svg>
                     </span>
-                  </div>
-
-                  <h1 className="text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                    Internet Cepat &{" "}
-                    <span className="text-orange-600 dark:text-orange-400">
-                      Stabil
-                    </span>{" "}
-                    Untuk Rumah Anda
                   </h1>
 
-                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-lg mb-8 leading-relaxed">
-                    Nikmati kecepatan internet hingga 100 Mbps dengan koneksi
-                    stabil sepanjang waktu. Paket berlangganan bulanan
-                    terjangkau untuk seluruh keluarga Anda.
+                  <p className="text-lg md:text-xl text-stone-600 dark:text-slate-400 mb-10 leading-relaxed max-w-md">
+                    Temukan momen unik dan pengalaman tak terlupakan dengan koneksi stabil. Dari streaming hiburan tanpa batas hingga produktivitas harian Anda.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
+                  <div className="flex flex-wrap items-center gap-4">
                     <Button
                       asChild
-                      size="lg"
-                      className="gap-2 bg-orange-600 hover:bg-orange-700 text-white"
+                      className="px-8 py-6 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg transition-transform hover:scale-105"
                     >
-                      <Link href="/auth">
-                        <span>Mulai Berlangganan</span>
-                        <ChevronRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      size="lg"
-                      variant="outline"
-                      className="border-orange-300 text-orange-600 hover:bg-orange-50 bg-transparent"
-                    >
-                      <Link href="#paket">
-                        <span>Lihat Paket Harga</span>
+                      <Link href="/auth/login">
+                        Berlangganan Sekarang
                       </Link>
                     </Button>
                   </div>
-
-                  {/* Trust metrics */}
-                  {/* <div className="pt-8 border-t border-orange-200 dark:border-orange-900/30">
-                    <p className="text-xs md:text-sm font-medium text-slate-600 dark:text-slate-400 mb-4">
-                      Dipercaya oleh ribuan pelanggan di seluruh kota
-                    </p>
-                    <div className="flex flex-wrap gap-6">
-                      <div>
-                        <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                          5000+
-                        </p>
-                        <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
-                          Pelanggan Aktif
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                          99.5%
-                        </p>
-                        <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
-                          Uptime Guarantee
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                          24/7
-                        </p>
-                        <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
-                          Customer Support
-                        </p>
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
 
-                {/* Right side - Hero image */}
-                <div className="relative h-96 md:h-full md:min-h-[500px] flex items-center justify-center">
-                  <div className="relative w-full h-full max-w-md">
+                {/* Right side - Hero image collage */}
+                <div className="lg:col-span-7 relative h-[600px] hidden md:block">
+                  <div className="absolute top-[10%] left-[5%] w-[45%] h-[60%] rounded-[2rem] overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-500 z-20">
                     <Image
-                      src="/hero.png"
-                      alt="WiFi service illustration"
+                      src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=1932&auto=format&fit=crop"
+                      alt="Family streaming"
                       fill
-                      className="object-contain"
-                      priority
+                      className="object-cover"
                     />
+                  </div>
+                  <div className="absolute top-0 right-[5%] w-[40%] h-[45%] rounded-[2rem] overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-500 z-10">
+                    <Image
+                      src="https://images.unsplash.com/photo-1617035969033-a5c113b6f0d5?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      alt="Working from home"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute bottom-[10%] right-[15%] w-[45%] h-[40%] rounded-tr-[4rem] rounded-bl-[4rem] rounded-tl-xl rounded-br-xl overflow-hidden shadow-2xl hover:scale-105 transition-transform duration-500 z-30">
+                    <Image
+                      src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
+                      alt="Gaming router"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  {/* Decorative Elements */}
+                  <div className="absolute top-[50%] left-[45%] w-16 h-16 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg z-40 transform -translate-x-1/2 -translate-y-1/2">
+                     <Signal className="w-8 h-8 text-orange-500" />
                   </div>
                 </div>
               </div>

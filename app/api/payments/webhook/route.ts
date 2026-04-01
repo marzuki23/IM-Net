@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { db, payments, subscriptions } from "@/db";
+import { db, payments, subscriptions, users } from "@/db";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
 
@@ -68,6 +68,12 @@ export async function POST(request: NextRequest) {
             nextBillingDate: nextDate,
           })
           .where(eq(subscriptions.id, payment.subscriptionId));
+          
+        // Additionally, update the user account status to active
+        await db
+          .update(users)
+          .set({ accountStatus: "active" })
+          .where(eq(users.id, payment.userId));
       }
     }
 

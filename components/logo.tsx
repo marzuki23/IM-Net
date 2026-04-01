@@ -1,16 +1,11 @@
 import { cn } from '@/lib/utils'
-import Image from "next/image";
 
 export const Logo = ({ className, uniColor }: { className?: string; uniColor?: boolean }) => {
     return (
-        <div className={cn("relative h-8 w-28", className)}>
-            <Image 
-                src="/logo.png" 
-                alt="IMNet Logo" 
-                fill 
-                className="object-contain object-left"
-                priority
-            />
+        <div className={cn("relative flex items-center", className)}>
+            <span className="text-2xl font-extrabold tracking-tight text-orange-600 dark:text-orange-500">
+                IM<span className="text-slate-900 dark:text-white">Net</span>
+            </span>
         </div>
     )
 }

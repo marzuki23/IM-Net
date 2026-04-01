@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { db } from "./db";
-import { users } from "./db/schema";
+import { db } from "..";
+import { users } from "../schema";
 import { hash } from "bcryptjs";
 import { eq } from "drizzle-orm";
 

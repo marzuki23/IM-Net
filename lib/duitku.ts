@@ -1,7 +1,11 @@
+import crypto from "crypto";
+
 const DUITKU_MERCHANT_CODE = process.env.DUITKU_MERCHANT_CODE;
 const DUITKU_API_KEY = process.env.DUITKU_API_KEY;
-const DUITKU_API_URL =
-  process.env.DUITKU_API_URL || "https://sandbox.duitku.com";
+
+// Automatically decide endpoint based on environment or default to sandbox
+const isProd = process.env.NODE_ENV === "production";
+const DUITKU_API_URL = process.env.DUITKU_API_URL || (isProd ? "https://api-prod.duitku.com" : "https://api-sandbox.duitku.com");
 
 interface DuitkuPaymentRequest {
   amount: number;
@@ -27,21 +31,64 @@ export async function createDuitkuPayment(
     throw new Error("DuitKu credentials not configured");
   }
 
-  const signature = createSignature(params.invoiceNumber, params.amount);
+  const timestamp = Date.now().toString();
+  const signature = crypto
+    .createHash("sha256")
+    .update(DUITKU_MERCHANT_CODE + timestamp + DUITKU_API_KEY)
+    .digest("hex");
+
+  // Required by Duitku Item Details summing up to amount
+  const itemDetails = [
+    {
+      name: params.description,
+      price: params.amount,
+      quantity: 1,
+    },
+  ];
+
+  // Provide basic dummy customer details if some values are missing, duitku requires some fields
+  const customerDetail = {
+    firstName: params.email.split("@")[0] || "Customer",
+    lastName: "IMNET",
+    email: params.email,
+    phoneNumber: params.phone || "081111111111",
+    billingAddress: {
+      firstName: params.email.split("@")[0] || "Customer",
+      lastName: "IMNET",
+      address: "Alamat Pelanggan",
+      city: "Jakarta",
+      postalCode: "10000",
+      phone: params.phone || "081111111111",
+      countryCode: "ID",
+    },
+    shippingAddress: {
+      firstName: params.email.split("@")[0] || "Customer",
+      lastName: "IMNET",
+      address: "Alamat Pelanggan",
+      city: "Jakarta",
+      postalCode: "10000",
+      phone: params.phone || "081111111111",
+      countryCode: "ID",
+    },
+  };
+
+  const callbackUrl = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/payments/webhook`;
 
   const payload = {
-    merchantCode: DUITKU_MERCHANT_CODE,
     paymentAmount: params.amount,
-    paymentMethod: "ALL",
-    paymentDescription: params.description,
     merchantOrderId: params.invoiceNumber,
-    merchantUserInfo: params.phone,
-    customerVaName: params.email,
+    productDetails: params.description,
+    additionalParam: "",
+    merchantUserInfo: "",
+    paymentMethod: "", // Leave blank to allow user to choose on Duitku UI
+    customerVaName: params.email.split("@")[0] || "Customer",
     email: params.email,
-    phoneNumber: params.phone,
+    phoneNumber: params.phone || "081111111111",
+    itemDetails: itemDetails,
+    customerDetail: customerDetail,
+    callbackUrl: callbackUrl,
     returnUrl: params.returnUrl,
     expiryPeriod: params.expiryPeriod,
-    signature: signature,
   };
 
   try {
@@ -50,17 +97,29 @@ export async function createDuitkuPayment(
       {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
+          "x-duitku-signature": signature,
+          "x-duitku-timestamp": timestamp,
+          "x-duitku-merchantcode": DUITKU_MERCHANT_CODE,
         },
         body: JSON.stringify(payload),
       }
     );
 
     if (!response.ok) {
-      throw new Error("Failed to create DuitKu payment");
+      const errorText = await response.text();
+      throw new Error(`Failed to create DuitKu payment: ${errorText}`);
     }
 
-    return await response.json();
+    const data = await response.json();
+    
+    // Duitku Pop API returns success with statusCode '00'
+    if (data.statusCode !== "00") {
+      throw new Error(`DuitKu API Error: ${data.statusMessage || JSON.stringify(data)}`);
+    }
+
+    return data;
   } catch (error) {
     console.error("DuitKu payment error:", error);
     throw error;
@@ -75,8 +134,8 @@ export function createSignature(
     throw new Error("DuitKu API key not configured");
   }
 
+  // Older API/Webhook uses md5 (merchantcode + orderid + amount + apikey)
   const data = DUITKU_MERCHANT_CODE + merchantOrderId + amount + DUITKU_API_KEY;
-  const crypto = require("crypto");
   return crypto.createHash("md5").update(data).digest("hex");
 }
 
@@ -85,11 +144,17 @@ export async function checkPaymentStatus(invoiceNumber: string): Promise<any> {
     throw new Error("DuitKu credentials not configured");
   }
 
-  const signature = createSignature(invoiceNumber, 0); // Amount is not needed for checking status
+  // standard signature for inquiry: md5(merchantCode + merchantOrderId + apiKey)
+  const data = DUITKU_MERCHANT_CODE + invoiceNumber + DUITKU_API_KEY;
+  const signature = crypto.createHash("md5").update(data).digest("hex");
+
+  const coreApiUrl = isProd
+    ? "https://passport.duitku.com"
+    : "https://sandbox.duitku.com";
 
   try {
     const response = await fetch(
-      `${DUITKU_API_URL}/api/merchant/inquiryinvoice`,
+      `${coreApiUrl}/webapi/api/merchant/transactionStatus`,
       {
         method: "POST",
         headers: {

@@ -21,7 +21,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { Users, CreditCard, TrendingUp, AlertCircle } from "lucide-react";
+import { Users, CreditCard, TrendingUp, AlertCircle, Wifi } from "lucide-react";
 
 export function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -63,180 +63,204 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950">
+    <div className="flex min-h-screen bg-[#F8F9FA] dark:bg-[#12131A] font-inter">
       <AdminSidebar />
 
-      <main className="flex-1 p-4 md:p-8">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Dashboard Admin
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400">
-              Selamat datang kembali! Berikut ringkasan sistem Anda
-            </p>
+      <main className="flex-1 p-6 md:p-10 lg:p-12 overflow-x-hidden">
+        <div className="max-w-[1400px] mx-auto space-y-8">
+          
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <h1 className="text-3xl md:text-[40px] font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
+                Dashboard Admin
+              </h1>
+              <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm md:text-base">
+                Platform management & financial overview
+              </p>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 bg-white dark:bg-[#1A1C23] px-4 py-2.5 flex-1 md:flex-none justify-center rounded-full border border-slate-100 dark:border-slate-800 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-sm">
+                  A
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white leading-none mb-1">Administrator</span>
+                  <span className="text-[10px] text-slate-500 leading-none">admin@imnet.id</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Total Pengguna
-                </CardTitle>
-                <Users className="h-4 w-4 text-orange-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.totalUsers}</div>
-                <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Pengguna terdaftar
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="bg-white dark:bg-[#1A1C23] p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+              <div className="absolute top-4 right-4 p-2 bg-slate-50 dark:bg-slate-800 rounded-full text-slate-400 group-hover:text-indigo-500 transition-colors cursor-pointer">
+                <Users className="h-4 w-4" />
+              </div>
+              <h3 className="text-slate-500 dark:text-slate-400 font-medium text-sm">Total Pengguna</h3>
+              <div className="mt-4 flex flex-col gap-1">
+                <span className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">{stats.totalUsers}</span>
+              </div>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+                  +12.1%
+                </span>
+                <span className="text-xs text-slate-400">vs last month</span>
+              </div>
+            </div>
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Langganan Aktif
-                </CardTitle>
-                <TrendingUp className="h-4 w-4 text-green-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
+            <div className="bg-white dark:bg-[#1A1C23] p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+              <div className="absolute top-4 right-4 p-2 bg-slate-50 dark:bg-slate-800 rounded-full text-slate-400 group-hover:text-amber-500 transition-colors cursor-pointer">
+                <TrendingUp className="h-4 w-4" />
+              </div>
+              <h3 className="text-slate-500 dark:text-slate-400 font-medium text-sm">Langganan Aktif</h3>
+              <div className="mt-4 flex flex-col gap-1">
+                <span className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {stats.activeSubscriptions}
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Langganan berjalan
-                </p>
-              </CardContent>
-            </Card>
+                </span>
+              </div>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+                  +6.3%
+                </span>
+                <span className="text-xs text-slate-400">vs last month</span>
+              </div>
+            </div>
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Pendapatan Bulan Ini
-                </CardTitle>
-                <CreditCard className="h-4 w-4 text-blue-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
+            <div className="bg-white dark:bg-[#1A1C23] p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+              <div className="absolute top-4 right-4 p-2 bg-slate-50 dark:bg-slate-800 rounded-full text-slate-400 group-hover:text-blue-500 transition-colors cursor-pointer">
+                <CreditCard className="h-4 w-4" />
+              </div>
+              <h3 className="text-slate-500 dark:text-slate-400 font-medium text-sm">Pendapatan Bulan Ini</h3>
+              <div className="mt-4 flex flex-col gap-1">
+                <span className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   Rp {stats.monthlyRevenue.toLocaleString("id-ID")}
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Total revenue
-                </p>
-              </CardContent>
-            </Card>
+                </span>
+              </div>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-400">
+                  +2.4%
+                </span>
+                <span className="text-xs text-slate-400">vs last month</span>
+              </div>
+            </div>
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Pembayaran Tertunda
-                </CardTitle>
-                <AlertCircle className="h-4 w-4 text-red-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
+            <div className="bg-white dark:bg-[#1A1C23] p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+              <div className="absolute top-4 right-4 p-2 bg-slate-50 dark:bg-slate-800 rounded-full text-slate-400 group-hover:text-rose-500 transition-colors cursor-pointer">
+                <AlertCircle className="h-4 w-4" />
+              </div>
+              <h3 className="text-slate-500 dark:text-slate-400 font-medium text-sm">Tertunda</h3>
+              <div className="mt-4 flex flex-col gap-1">
+                <span className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {stats.pendingPayments}
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Menunggu pembayaran
-                </p>
-              </CardContent>
-            </Card>
+                </span>
+              </div>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                  Dalam proses tagihan
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Charts */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Tren Pendapatan</CardTitle>
-                <CardDescription>Pendapatan 12 bulan terakhir</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div className="bg-white dark:bg-[#1A1C23] p-6 lg:p-8 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Tren Pendapatan</h3>
+              </div>
+              <div className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#94A3B8', fontSize: 12}} dy={10} />
+                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#94A3B8', fontSize: 12}} dx={-10} />
+                    <Tooltip 
+                      contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
+                    />
+                    <Legend iconType="circle" wrapperStyle={{paddingTop: '20px'}} />
                     <Line
                       type="monotone"
                       dataKey="revenue"
-                      stroke="#f97316"
+                      stroke="#818CF8" // indigo-400
                       name="Pendapatan"
+                      strokeWidth={4}
+                      dot={{r: 4, strokeWidth: 2}}
+                      activeDot={{r: 6}}
                     />
                   </LineChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Perbandingan Status Pembayaran</CardTitle>
-                <CardDescription>
-                  Distribusi status pembayaran bulan ini
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="completed" fill="#10b981" name="Selesai" />
-                    <Bar dataKey="pending" fill="#f59e0b" name="Tertunda" />
-                    <Bar dataKey="failed" fill="#ef4444" name="Gagal" />
+            <div className="bg-white dark:bg-[#1A1C23] p-6 lg:p-8 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Status Pembayaran</h3>
+              </div>
+              <div className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#94A3B8', fontSize: 12}} dy={10} />
+                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#94A3B8', fontSize: 12}} dx={-10} />
+                    <Tooltip 
+                      contentStyle={{borderRadius: '16px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
+                      cursor={{fill: 'transparent'}}
+                    />
+                    <Legend iconType="circle" wrapperStyle={{paddingTop: '20px'}} />
+                    <Bar dataKey="completed" fill="#818CF8" name="Selesai" radius={[6, 6, 6, 6]} barSize={12} />
+                    <Bar dataKey="pending" fill="#C7D2FE" name="Tertunda" radius={[6, 6, 6, 6]} barSize={12} />
+                    <Bar dataKey="failed" fill="#FCA5A5" name="Gagal" radius={[6, 6, 6, 6]} barSize={12} />
                   </BarChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
 
-          {/* Quick Actions */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Aksi Cepat</CardTitle>
-              <CardDescription>Akses fitur manajemen utama</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a
-                  href="/admin/accounts"
-                  className="p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <Users className="h-6 w-6 text-orange-600 mb-2" />
-                  <h3 className="font-semibold">Manajemen Akun</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Kelola akun pengguna dan status
-                  </p>
-                </a>
-                <a
-                  href="/admin/financial"
-                  className="p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <CreditCard className="h-6 w-6 text-blue-600 mb-2" />
-                  <h3 className="font-semibold">Rekap Keuangan</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Lihat detail keuangan dan laporan
-                  </p>
-                </a>
-                <a
-                  href="/admin/requests"
-                  className="p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <AlertCircle className="h-6 w-6 text-amber-600 mb-2" />
-                  <h3 className="font-semibold">Pengajuan Akun</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Kelola pengajuan pengguna baru
-                  </p>
-                </a>
+          {/* Quick Actions / Shortcuts mapped from the original logic */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <a
+              href="/admin/accounts"
+              className="group p-6 rounded-[24px] bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800/50 hover:shadow-md transition-all duration-300 relative overflow-hidden flex flex-col"
+            >
+              <div className="p-4 bg-white dark:bg-slate-800 rounded-[16px] w-fit shadow-sm relative z-10 mb-12">
+                <Users className="h-6 w-6 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
               </div>
-            </CardContent>
-          </Card>
+              <h3 className="font-bold text-xl text-slate-900 dark:text-white z-10">Manajemen Akun</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 z-10 max-w-[80%]">
+                Kelola pendaftaran dan atur status akses pelanggan aktif.
+              </p>
+            </a>
+            
+            <a
+              href="/admin/financial"
+              className="group p-6 rounded-[24px] bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/50 hover:shadow-md transition-all duration-300 relative overflow-hidden flex flex-col"
+            >
+              <div className="p-4 bg-white dark:bg-slate-800 rounded-[16px] w-fit shadow-sm relative z-10 mb-12">
+                <CreditCard className="h-6 w-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-xl text-slate-900 dark:text-white z-10">Rekap Keuangan</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 z-10 max-w-[80%]">
+                Analisis laporan pemasukan bulanan untuk pantau pertumbuhan.
+              </p>
+            </a>
+
+            <a
+              href="/admin/subscriptions"
+              className="group p-6 rounded-[24px] bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800/50 hover:shadow-md transition-all duration-300 relative overflow-hidden flex flex-col"
+            >
+              <div className="p-4 bg-white dark:bg-slate-800 rounded-[16px] w-fit shadow-sm relative z-10 mb-12">
+                <Wifi className="h-6 w-6 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-xl text-slate-900 dark:text-white z-10">Daftar Langganan</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 z-10 max-w-[80%]">
+                Pantau status perangkat keras dan internet yang berjalan.
+              </p>
+            </a>
+          </div>
+
         </div>
       </main>
     </div>

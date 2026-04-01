@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { db } from "./db";
+import { db } from "..";
 import { sql } from "drizzle-orm";
 
 async function checkConnection() {

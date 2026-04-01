@@ -2,113 +2,73 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Check, Zap } from "lucide-react";
 import { WIFI_PACKAGES } from "@/app/config/packages";
+import Image from "next/image";
+
+const packageImages: Record<string, string> = {
+  "pkg-10mbps": "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=2070&auto=format&fit=crop",
+  "pkg-20mbps": "https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=1932&auto=format&fit=crop",
+  "pkg-40mbps": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=2165&auto=format&fit=crop",
+  "pkg-60mbps": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop",
+};
 
 export default function PricingWiFi() {
   return (
     <section
       id="paket"
-      className="py-16 md:py-24 bg-gradient-to-b from-orange-50 to-white dark:from-orange-950/10 dark:to-slate-950"
+      className="py-16 md:py-24 bg-[#FAF8F5] dark:bg-slate-950"
     >
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Paket Internet Kami
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Pilih paket yang sesuai dengan kebutuhan Anda dan nikmati internet
-            tanpa batas
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {WIFI_PACKAGES.map((pkg) => (
-            <Card
-              key={pkg.id}
-              className={`flex flex-col transition-all border-2 ${
-                pkg.recommended
-                  ? "border-orange-600 dark:border-orange-400 transform lg:scale-105 shadow-xl bg-white dark:bg-slate-900"
-                  : "border-slate-200 dark:border-slate-800 hover:border-orange-300 dark:hover:border-orange-900/50 bg-slate-50 dark:bg-slate-900/50"
-              }`}
-            >
-              {pkg.recommended && (
-                <div className="bg-gradient-to-r from-orange-600 to-orange-500 text-white py-2 px-4 rounded-t-lg flex items-center gap-2 justify-center">
-                  <Zap className="w-4 h-4" />
-                  <span className="text-sm font-semibold">
-                    Rekomendasi Terbaik
-                  </span>
-                </div>
-              )}
-
-              <CardHeader>
-                <CardTitle className="text-2xl">{pkg.name}</CardTitle>
-                <CardDescription>{pkg.description}</CardDescription>
-              </CardHeader>
-
-              <CardContent className="flex-1">
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-4xl font-bold text-slate-900 dark:text-white">
-                      {(pkg.price / 1000).toFixed(0)}K
-                    </span>
-                    <span className="text-slate-600 dark:text-slate-400">
-                      /bulan
-                    </span>
-                  </div>
-                  <p className="text-lg font-semibold text-orange-600 dark:text-orange-400 mb-4">
-                    {pkg.speed}
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  {pkg.features?.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-orange-600 dark:text-orange-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-slate-600 dark:text-slate-400">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-
-              <CardFooter>
-                <Button
-                  asChild
-                  className={`w-full ${
-                    pkg.recommended
-                      ? "bg-orange-600 hover:bg-orange-700 text-white"
-                      : "bg-slate-200 hover:bg-slate-300 text-slate-900"
-                  }`}
-                >
-                  <Link href="/dashboard/requests">Pilih Paket</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-
-        <div className="mt-12 p-8 bg-gradient-to-r from-blue-50 to-orange-50 dark:from-blue-900/20 dark:to-orange-900/20 border border-orange-200 dark:border-orange-900/50 rounded-xl text-center">
-          <p className="text-slate-700 dark:text-slate-300 mb-4 font-medium">
-            Belum yakin? Hubungi tim kami untuk konsultasi gratis dan penawaran
-            khusus
-          </p>
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#2a2a2a] dark:text-white mb-6">
+              Pilihan Paket Terbaik
+            </h2>
+            
+            {/* Nav pills acting as filters in reference */}
+            <div className="flex flex-wrap gap-4 md:gap-8 items-center text-sm font-medium text-stone-500 overflow-x-auto pb-2">
+              <span className="text-[#2a2a2a] dark:text-white font-bold whitespace-nowrap border-b-2 border-[#2a2a2a] dark:border-white pb-1">Populer</span>
+              <span className="cursor-pointer hover:text-[#2a2a2a] transition-colors whitespace-nowrap">Gaming</span>
+              <span className="cursor-pointer hover:text-[#2a2a2a] transition-colors whitespace-nowrap">Keluarga</span>
+              <span className="cursor-pointer hover:text-[#2a2a2a] transition-colors whitespace-nowrap">Sultan</span>
+            </div>
+          </div>
+          
           <Button
             asChild
-            size="lg"
-            className="bg-orange-600 hover:bg-orange-700 text-white"
+            variant="outline"
+            className="rounded-full px-6 border-stone-300 text-[#2a2a2a] dark:text-white hover:bg-stone-200"
           >
-            <Link href="#">Hubungi Kami Sekarang</Link>
+            <Link href="#paket">Eksplor semua paket</Link>
           </Button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {WIFI_PACKAGES.map((pkg) => (
+            <Link href="/auth" key={pkg.id} className="group flex flex-col cursor-pointer">
+              <div className="relative w-full h-80 rounded-[2rem] overflow-hidden mb-4 shadow-sm group-hover:shadow-xl transition-all duration-300">
+                <Image
+                  src={packageImages[pkg.id] || packageImages["pkg-10mbps"]}
+                  alt={pkg.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-bold text-[#2a2a2a]">
+                  {pkg.speed}
+                </div>
+              </div>
+              
+              <div className="px-2">
+                <h3 className="text-xl font-bold text-[#2a2a2a] dark:text-white mb-1 group-hover:text-orange-500 transition-colors">
+                  {pkg.name}
+                </h3>
+                <p className="text-stone-500 text-sm mb-2">{pkg.description}</p>
+                <div className="flex items-center justify-between mt-auto">
+                    <span className="font-bold text-lg text-[#2a2a2a] dark:text-white">Rp {(pkg.price / 1000).toFixed(0)}K<span className="font-normal text-sm text-stone-500">/bln</span></span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

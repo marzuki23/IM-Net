@@ -34,6 +34,8 @@ export default function SubscriptionsPage() {
     fetchSubscriptions();
   }, []);
 
+  const [renewingId, setRenewingId] = useState<string | null>(null);
+
   const fetchSubscriptions = async () => {
     try {
       setLoading(true);
@@ -51,19 +53,24 @@ export default function SubscriptionsPage() {
 
   const handleRenewal = async (subscriptionId: string) => {
     try {
+      setRenewingId(subscriptionId);
       const response = await fetch("/api/user/subscriptions/renew", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subscriptionId }),
       });
 
-      if (response.ok) {
-        // Redirect to payment
-        const data = await response.json();
-        window.location.href = `/dashboard/payments/${data.paymentId}`;
+      const data = await response.json();
+      if (response.ok && data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+      } else {
+        alert(data.error || "Gagal membuat pembayaran");
       }
     } catch (error) {
       console.error("Error initiating renewal:", error);
+      alert("Terjadi kesalahan sistem saat menghubungi gateway Duitku.");
+    } finally {
+      setRenewingId(null);
     }
   };
 
@@ -157,8 +164,12 @@ export default function SubscriptionsPage() {
 
                     <Button
                       onClick={() => handleRenewal(sub.id)}
+                      disabled={renewingId === sub.id}
                       className="w-full bg-orange-600 hover:bg-orange-700"
                     >
+                      {renewingId === sub.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      ) : null}
                       Perpanjang Sekarang
                     </Button>
                   </CardContent>

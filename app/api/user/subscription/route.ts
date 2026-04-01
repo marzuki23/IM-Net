@@ -13,7 +13,8 @@ export async function GET(request: NextRequest) {
     }
 
     const subscription = await db.query.subscriptions.findFirst({
-      where: eq(subscriptions.userId, userId),
+      where: (subscriptions, { eq }) => eq(subscriptions.userId, userId),
+      orderBy: (subscriptions, { desc }) => [desc(subscriptions.createdAt)],
     });
 
     if (!subscription) {

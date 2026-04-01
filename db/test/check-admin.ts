@@ -1,4 +1,4 @@
-import { db, users } from "./db";
+import { db, users } from "..";
 import { eq } from "drizzle-orm";
 
 async function main() {

@@ -63,19 +63,19 @@ export default function FAQWiFi() {
   ];
 
   return (
-    <section id="faq" className="py-16 md:py-24 bg-white dark:bg-slate-950">
-      <div className="mx-auto max-w-5xl px-6">
+    <section id="faq" className="py-16 md:py-24 bg-[#FAF8F5] dark:bg-slate-950">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="flex flex-col gap-10 md:flex-row md:gap-16">
           <div className="md:w-1/3">
             <div className="sticky top-20">
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-[#2a2a2a] dark:text-white mb-6">
                 Pertanyaan Umum
               </h2>
-              <p className="text-slate-600 dark:text-slate-400 mb-4">
+              <p className="text-stone-500 mb-4 max-w-sm">
                 Tidak menemukan jawaban yang Anda cari? Hubungi{" "}
                 <Link
-                  href="/auth"
-                  className="text-orange-600 dark:text-orange-400 font-medium hover:underline"
+                  href="/auth/login/login/login"
+                  className="text-orange-500 font-bold hover:underline"
                 >
                   tim dukungan kami
                 </Link>
@@ -83,29 +83,29 @@ export default function FAQWiFi() {
             </div>
           </div>
           <div className="md:w-2/3">
-            <Accordion type="single" collapsible className="w-full space-y-2">
+            <Accordion type="single" collapsible className="w-full space-y-4">
               {faqItems.map((item) => (
                 <AccordionItem
                   key={item.id}
                   value={item.id}
-                  className="bg-slate-50 dark:bg-slate-900/50 border-2 border-slate-200 dark:border-slate-800 rounded-lg px-4 data-[state=open]:border-orange-600 data-[state=open]:dark:border-orange-400"
+                  className="bg-white dark:bg-slate-900/80 border-none shadow-sm rounded-[1rem] px-6 data-[state=open]:shadow-md transition-shadow"
                 >
-                  <AccordionTrigger className="cursor-pointer items-center py-5 hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <div className="flex size-6 text-orange-600 dark:text-orange-400 flex-shrink-0">
+                  <AccordionTrigger className="cursor-pointer items-center py-6 hover:no-underline text-left">
+                    <div className="flex items-center gap-4">
+                      <div className="flex size-10 bg-orange-50 dark:bg-orange-900/30 rounded-full text-orange-500 items-center justify-center flex-shrink-0">
                         <DynamicIcon
                           name={item.icon}
-                          className="m-auto size-5"
+                          className="size-5"
                         />
                       </div>
-                      <span className="text-base font-medium text-left">
+                      <span className="text-lg font-bold text-[#2a2a2a] dark:text-white">
                         {item.question}
                       </span>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-5">
-                    <div className="pl-9">
-                      <p className="text-base text-slate-600 dark:text-slate-400">
+                  <AccordionContent className="pb-6">
+                    <div className="pl-14">
+                      <p className="text-base text-stone-500 leading-relaxed">
                         {item.answer}
                       </p>
                     </div>

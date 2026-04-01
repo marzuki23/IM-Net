@@ -1,49 +1,48 @@
-import Link from "next/link";
+"use client";
+
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 export default function CTAWiFi() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-r from-orange-600 via-orange-500 to-red-600 dark:from-orange-700 dark:via-orange-600 dark:to-red-700 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Siap Untuk Koneksi Internet Terbaik?
-        </h2>
-        <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10">
-          Bergabunglah dengan ribuan pelanggan yang telah merasakan kecepatan
-          dan stabilitas internet kami. Daftar sekarang dan nikmati layanan
-          terbaik dengan harga terjangkau.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            asChild
-            size="lg"
-            className="bg-white text-orange-600 hover:bg-gray-100 gap-2 font-semibold"
-          >
-            <Link href="/auth">
-              <span>Daftar Sekarang</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-2 border-white text-white hover:bg-white/20 bg-transparent font-semibold"
-          >
-            <Link href="#paket">Lihat Paket</Link>
-          </Button>
+    <section className="pb-16 md:pb-32 px-6 md:px-12 bg-[#FAF8F5] dark:bg-slate-950">
+      <div className="mx-auto max-w-7xl relative rounded-[2rem] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1510442650500-93217e634e4c?q=80&w=2155&auto=format&fit=crop"
+            alt="Beautiful vast landscape"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <p className="text-white/80 text-sm mt-8">
-          Tidak perlu kartu kredit untuk memulai. Instalasi gratis di area kami.
-        </p>
+        {/* Content */}
+        <div className="relative z-10 py-24 px-6 flex flex-col items-center text-center">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-8 max-w-2xl leading-tight">
+            Dapatkan Kecepatan TERBAIK dan Harga TERJANGKAU
+          </h2>
+
+          {/* <form className="w-full max-w-md flex flex-col sm:flex-row gap-3 mb-6" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="email"
+              placeholder="Email address"
+              className="flex-1 px-6 py-4 rounded-full text-stone-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              required
+            />
+            <Button
+              type="submit"
+              className="px-8 py-7 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-base transition-transform hover:scale-105"
+            >
+              Berlangganan
+            </Button>
+          </form>
+
+          <p className="text-white/80 text-sm">
+            Daftar untuk newsletter kami dan penawaran eksklusif. Baca <a href="#" className="underline">Kebijakan Privasi</a>.
+          </p> */}
+        </div>
       </div>
     </section>
   );
