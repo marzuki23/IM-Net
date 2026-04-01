@@ -3,8 +3,9 @@ import crypto from "crypto";
 const DUITKU_MERCHANT_CODE = process.env.DUITKU_MERCHANT_CODE;
 const DUITKU_API_KEY = process.env.DUITKU_API_KEY;
 
-// Automatically decide endpoint based on environment or default to sandbox
-const isProd = process.env.NODE_ENV === "production";
+// Automatically decide endpoint based on merchant code prefix (DS = Sandbox)
+const DUITKU_ENV = process.env.DUITKU_ENV || (DUITKU_MERCHANT_CODE?.startsWith("DS") ? "sandbox" : "production");
+const isProd = DUITKU_ENV === "production";
 const DUITKU_API_URL = process.env.DUITKU_API_URL || (isProd ? "https://api-prod.duitku.com" : "https://api-sandbox.duitku.com");
 
 interface DuitkuPaymentRequest {
