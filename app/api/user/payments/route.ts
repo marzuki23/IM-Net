@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { db, payments } from "@/db";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { cookies } from "next/headers";
 
 export async function GET(request: NextRequest) {
@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
 
     const userPayments = await db.query.payments.findMany({
       where: eq(payments.userId, userId),
+      orderBy: [desc(payments.createdAt)],
     });
 
     return NextResponse.json({

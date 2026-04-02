@@ -3,9 +3,9 @@ import crypto from "crypto";
 const DUITKU_MERCHANT_CODE = process.env.DUITKU_MERCHANT_CODE;
 const DUITKU_API_KEY = process.env.DUITKU_API_KEY;
 
-// Automatically decide endpoint based on environment or default to sandbox
-const isProd = process.env.NODE_ENV === "production";
-const DUITKU_API_URL = process.env.DUITKU_API_URL || (isProd ? "https://api-prod.duitku.com" : "https://api-sandbox.duitku.com");
+// URLs harus diisi manual di .env
+const DUITKU_API_URL = process.env.DUITKU_API_URL;
+const DUITKU_PASSPORT_URL = process.env.DUITKU_PASSPORT_URL; 
 
 interface DuitkuPaymentRequest {
   amount: number;
@@ -29,6 +29,9 @@ export async function createDuitkuPayment(
 ): Promise<DuitkuPaymentResponse> {
   if (!DUITKU_MERCHANT_CODE || !DUITKU_API_KEY) {
     throw new Error("DuitKu credentials not configured");
+  }
+  if (!DUITKU_API_URL) {
+    throw new Error("DUITKU_API_URL not configured in .env");
   }
 
   const timestamp = Date.now().toString();
@@ -148,9 +151,11 @@ export async function checkPaymentStatus(invoiceNumber: string): Promise<any> {
   const data = DUITKU_MERCHANT_CODE + invoiceNumber + DUITKU_API_KEY;
   const signature = crypto.createHash("md5").update(data).digest("hex");
 
-  const coreApiUrl = isProd
-    ? "https://passport.duitku.com"
-    : "https://sandbox.duitku.com";
+  if (!DUITKU_PASSPORT_URL) {
+    throw new Error("DUITKU_PASSPORT_URL not configured in .env");
+  }
+
+  const coreApiUrl = DUITKU_PASSPORT_URL;
 
   try {
     const response = await fetch(

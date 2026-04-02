@@ -45,7 +45,7 @@ export default function PricingWiFi() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {WIFI_PACKAGES.map((pkg) => (
-            <Link href="/auth" key={pkg.id} className="group flex flex-col cursor-pointer">
+            <Link href="/dashboard" key={pkg.id} className="group flex flex-col cursor-pointer">
               <div className="relative w-full h-80 rounded-[2rem] overflow-hidden mb-4 shadow-sm group-hover:shadow-xl transition-all duration-300">
                 <Image
                   src={packageImages[pkg.id] || packageImages["pkg-10mbps"]}
